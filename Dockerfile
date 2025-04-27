@@ -17,16 +17,14 @@ RUN apk add --no-cache \
 # Install poetry and update pip/wheel
 RUN pip install --upgrade pip poetry wheel spotipy
 
-# Copy requirements files
+# Copy requirements and README
 COPY poetry.lock pyproject.toml /
+COPY README.md /
 
-# Install spotdl requirements
-RUN poetry install
-
-# Add source code files to WORKDIR
+# Add source code files
 ADD . .
 
-# Install spotdl itself
+# Install spotdl requirements and itself
 RUN poetry install
 
 # Create music directory
